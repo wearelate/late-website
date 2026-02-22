@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — The Community</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#community-page { padding-top: 5rem; min-height: 100vh; }
+
+/* IMAGE + TEXT SIDE BY SIDE */
+.community-hero {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-top: 3.5rem;
+  margin-bottom: 4rem;
+  border: 1px solid rgba(124,58,237,0.2);
+  background: rgba(13,13,26,0.6);
+  overflow: hidden;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.community-hero-img {
+  flex-shrink: 0;
+  width: 360px;
+  min-height: 280px;
+}
+.community-hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: none !important;
+  transform: none !important;
+  filter: none;
+}
+
+.community-hero-text {
+  padding: 2.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(124,58,237,0.15);
+}
+.community-hero-text p {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  line-height: 1.8;
+  color: rgba(240,238,255,0.7);
+  margin-bottom: 1.2rem;
+}
+.community-hero-text p:last-child { margin-bottom: 0; }
+.community-hero-text em { color: var(--lilac); font-style: italic; }
+
+/* ARCHETYPES */
+.archetype-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 3.5rem;
+}
+.arch-card {
+  border: 1px solid rgba(124,58,237,0.15);
+  padding: 2rem;
+  background: rgba(13,13,26,0.6);
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+}
+.arch-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--purple), var(--purple-glow));
+  transform: scaleX(0);
+  transition: transform 0.35s;
+}
+.arch-card:hover { border-color: rgba(168,85,247,0.3); transform: translateY(-4px); }
+.arch-card:hover::before { transform: scaleX(1); }
+
+.arch-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.arch-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+.arch-body { font-size: 0.78rem; line-height: 1.8; color: var(--muted); }
+
+/* STATS */
+.stats-row {
+  display: flex;
+  border: 1px solid rgba(124,58,237,0.12);
+  margin-top: 3rem;
+}
+.stat-cell { flex: 1; padding: 1.8rem; text-align: center; border-right: 1px solid rgba(124,58,237,0.12); }
+.stat-cell:last-child { border-right: none; }
+.stat-cell-val { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--white); line-height: 1; }
+.stat-cell-val em { font-style: normal; color: var(--purple-glow); }
+.stat-cell-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+
+/* MEME SECTION */
+.meme-section { margin-top: 6rem; }
+.meme-section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+}
+.meme-section-title em { font-style: italic; color: var(--lilac); }
+
+.meme-wall { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; }
+.meme-card {
+  border: 1px solid rgba(124,58,237,0.12);
+  background: rgba(8,8,16,0.8);
+  padding: 1.8rem 2rem;
+  position: relative;
+  font-size: 0.78rem;
+}
+.meme-card.wide { grid-column: span 2; display: flex; gap: 2.5rem; align-items: center; }
+.meme-tag {
+  position: absolute; top: 1rem; right: 1rem;
+  font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--purple-glow); background: rgba(124,58,237,0.1); padding: 0.2rem 0.5rem;
+}
+.meme-quote {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  color: var(--white);
+  margin-bottom: 0.7rem;
+  line-height: 1.45;
+}
+.meme-attr { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; }
+
+.fake-screenshot {
+  background: rgba(13,13,26,0.9);
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 4px;
+  padding: 1.2rem 1.5rem;
+  flex: 1;
+  font-size: 0.74rem;
+  line-height: 1.9;
+}
+.fs-row { margin-bottom: 0.2rem; }
+.fs-user { color: var(--purple-glow); font-weight: bold; }
+.fs-text { color: var(--white); margin-left: 0.4rem; }
+.fs-time { font-size: 0.6rem; color: var(--muted); margin-left: 0.4rem; }
+.fs-reply { padding-left: 1.2rem; border-left: 2px solid rgba(124,58,237,0.25); margin-top: 0.6rem; }
+
+.meme-card-caption { flex: 1; }
+.mcc-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; margin-bottom: 0.5rem; line-height: 1.3; }
+.mcc-body { font-size: 0.78rem; color: var(--muted); line-height: 1.8; }
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(124,58,237,0.1);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.page-nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.page-nav a:hover, .page-nav .next { color: var(--white); }
+
+@media (max-width: 768px) {
+  .archetype-grid { grid-template-columns: 1fr 1fr; }
+  .meme-wall { grid-template-columns: 1fr; }
+  .meme-card.wide { flex-direction: column; grid-column: span 1; }
+  .stats-row { flex-direction: column; }
+  .stat-cell { border-right: none; border-bottom: 1px solid rgba(124,58,237,0.12); }
+  .community-hero { flex-direction: column; }
+  .community-hero-img { width: 100%; }
+  .community-hero-text { padding: 1.5rem; }
+}
+@media (max-width: 500px) {
+  .archetype-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+  <div id="cursor" style="width:6px;height:6px;background:var(--purple-glow);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s;mix-blend-mode:screen;"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lore.html">Lore</a></li>
+      <li><a href="what.html">What is $LATE</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="join.html" class="nav-cta">Join</a></li>
+    </ul>
+    <div class="nav-burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="lore.html">Lore</a>
+    <a href="what.html">What is $LATE</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="community.html">Community</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="faq.html">FAQ</a>
+    <a href="join.html">Join →</a>
+  </div>
+
+<div id="community-page">
+  <div class="section-inner">
+    <span class="section-tag reveal">Chapter 04</span>
+    <h1 class="section-title reveal">The <em>Late</em><br>Collective.</h1>
+    <p class="reveal" style="color:var(--muted);font-size:0.85rem;max-width:540px;line-height:2;">
+      No whitelists. No role assignments. No "OG" badge for buying an NFT at mint. Just people who showed up late — and decided to stay.
+    </p>
+
+    <!-- IMAGE + INTRO BLOCK -->
+    <div class="community-hero">
+      <div class="community-hero-img">
+        <img src="community.png" alt="The Late Collective">
+      </div>
+      <div class="community-hero-text">
+        <p>Every cycle has its winners — the ones who got in at $200k MC, sold at $80M, and posted their portfolio at 3am.</p>
+        <p>Then there's everyone else. The researchers. The retrace-waiters. The "I knew about it before the pump" crowd.</p>
+        <p><em>This is their community.</em></p>
+      </div>
+    </div>
+
+    <div class="archetype-grid" data-stagger>
+      <div class="arch-card reveal">
+        <span class="arch-emoji">😶‍🌫️</span>
+        <div class="arch-title">The Calculated Spectator</div>
+        <div class="arch-body">Has a spreadsheet of every missed entry. Can tell you the exact return on 11 different tokens they never bought. Still in the server. Still watching. Their analysis is impeccable.</div>
+      </div>
+      <div class="arch-card reveal">
+        <span class="arch-emoji">☕</span>
+        <div class="arch-title">The 3am Researcher</div>
+        <div class="arch-body">By the time they finish reading the whitepaper, understanding the tokenomics, and sleeping on it — it's already 40x. Their research is thorough. Their timing is cosmically cursed.</div>
+      </div>
+      <div class="arch-card reveal">
+        <span class="arch-emoji">📉</span>
+        <div class="arch-title">The Hopeful Retrace</div>
+        <div class="arch-body">Waiting for the dip since March. The dip never came. Now they're waiting for a different dip. The dip is a philosophy, not a price point. They've made peace with this. Mostly.</div>
+      </div>
+      <div class="arch-card reveal">
+        <span class="arch-emoji">🔮</span>
+        <div class="arch-title">The Post-Pump Philosopher</div>
+        <div class="arch-body">"I knew about it before the pump." Yes. They all did. They just forgot to buy. Now they've reframed it as intentional restraint. It's not working. They know. They post about it.</div>
+      </div>
+      <div class="arch-card reveal">
+        <span class="arch-emoji">🫡</span>
+        <div class="arch-title">The One Who Stayed</div>
+        <div class="arch-body">Got in late. Watched it go sideways. Didn't leave. Not because they're delusional — because they found something rarer than a 100x: a community that makes sense at 4am.</div>
+      </div>
+      <div class="arch-card reveal">
+        <span class="arch-emoji">🎭</span>
+        <div class="arch-title">The Irony Maximalist</div>
+        <div class="arch-body">Understands every layer of the meta. Participates anyway. Posts memes requiring three prior memes to decode. The backbone of the culture. The reason the chat is alive.</div>
+      </div>
+    </div>
+
+    <div class="stats-row reveal">
+      <div class="stat-cell">
+        <div class="stat-cell-val"><em>0</em></div>
+        <div class="stat-cell-label">Paid Promos</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-val"><em>0</em></div>
+        <div class="stat-cell-label">Fake Partners</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-val"><em>∞</em></div>
+        <div class="stat-cell-label">Shared Trauma</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-val"><em>1</em></div>
+        <div class="stat-cell-label">Honest Token</div>
+      </div>
+    </div>
+
+    <!-- MEME CULTURE -->
+    <div class="meme-section">
+      <h2 class="meme-section-title reveal">Memes are the only<br><em>honest communication</em><br>left in crypto.</h2>
+
+      <div class="meme-wall">
+        <div class="meme-card wide reveal">
+          <div class="fake-screenshot">
+            <div class="fs-row"><span class="fs-user">@anon</span><span class="fs-text">bro I was literally ABOUT to buy that at 200k mc</span><span class="fs-time">2:47 AM</span></div>
+            <div class="fs-reply">
+              <div class="fs-row"><span class="fs-user">@also_anon</span><span class="fs-text">same. I was doing research</span><span class="fs-time">2:49 AM</span></div>
+            </div>
+            <div class="fs-reply">
+              <div class="fs-row"><span class="fs-user">@third_anon</span><span class="fs-text">I waited for the dip. there was no dip. there was only up and then grief</span><span class="fs-time">2:53 AM</span></div>
+            </div>
+            <div class="fs-reply">
+              <div class="fs-row"><span class="fs-user">@LATE_official</span><span class="fs-text">we made a coin for this moment specifically</span><span class="fs-time">now</span></div>
+            </div>
+          </div>
+          <div class="meme-card-caption">
+            <p class="mcc-title">This conversation has happened to everyone. We just made it a ticker.</p>
+            <p class="mcc-body">$LATE is the first coin whose founding moment is a feeling you've already had. Multiple times. Probably this week. We didn't invent the emotion. We named it.</p>
+          </div>
+        </div>
+
+        <div class="meme-card reveal">
+          <div class="meme-tag">Relatable</div>
+          <p class="meme-quote">"I don't have FOMO, I have a very carefully considered system that has not worked once."</p>
+          <p class="meme-attr">— Every $LATE holder, probably</p>
+        </div>
+
+        <div class="meme-card reveal">
+          <div class="meme-tag">Ancient Proverb</div>
+          <p class="meme-quote">"The best time to buy was 3 months ago. The second best time is now. The third best time — which is what I'll do — is after it dips a bit more."</p>
+          <p class="meme-attr">— $LATE oral tradition</p>
+        </div>
+
+        <div class="meme-card reveal">
+          <div class="meme-tag">Philosophy</div>
+          <p class="meme-quote">"Too late but still early is not a contradiction. It is the exact description of every correct decision you've ever made that you didn't make in time."</p>
+          <p class="meme-attr">— The $LATE Paradox, Chapter 1</p>
+        </div>
+
+        <div class="meme-card reveal">
+          <div class="meme-tag">Dark</div>
+          <p class="meme-quote">"We are people who calculate exactly what we would have made — and then tell no one. That's not shame. That's discipline. Dark, pointless, oddly comforting discipline."</p>
+          <p class="meme-attr">— The Late Collective Handbook (draft, unpublished)</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;display:flex;gap:1rem;flex-wrap:wrap;" class="reveal">
+      <a href="join.html" class="btn-primary">Join on Telegram →</a>
+      <a href="roadmap.html" class="btn-ghost">See the Roadmap</a>
+    </div>
+
+    <div class="page-nav">
+      <a href="manifesto.html">← Manifesto</a>
+      <a href="roadmap.html" class="next">Roadmap →</a>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+  <footer>
+    <span class="footer-logo">$LATE</span>
+    <div>
+      <a href="https://t.me/alwayslateonsol" target="_blank" rel="noopener">Telegram</a> &nbsp;·&nbsp;
+      <a href="https://x.com/wearelateonsol" target="_blank" rel="noopener">X / Twitter</a> &nbsp;·&nbsp;
+      <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+      <a href="#">Raydium</a>
+    </div>
+    <div class="footer-disclaimer">
+      $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+      This is not financial advice. This is not investment advice. This is a website about a coin
+      named after the feeling you have when you don't take financial advice. Please be careful with your money.
+    </div>
+    <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+      © 2026 $LATE — Chronologically Cursed By Design
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — You Already Know</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ---- HERO PAGE ---- */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,58,237,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(168,85,247,0.1) 0%, transparent 60%),
+    var(--black);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(124,58,237,0.02) 2px, rgba(124,58,237,0.02) 4px
+  );
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+/* ============================================
+   LOGO / MASCOT
+   Remplace YOUR-LOGO.png par le nom de ton fichier
+   ============================================ */
+.hero-logo-wrap {
+  width: 440px;
+  height: 440px;
+  margin: 0 auto 2.5rem;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(124,58,237,0.5))
+          drop-shadow(0 0 100px rgba(168,85,247,0.15));
+}
+.hero-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* ---- REST OF HERO ---- */
+.hero-badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--purple-glow);
+  border: 1px solid rgba(168,85,247,0.3);
+  padding: 0.35rem 1rem;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 0.8s ease both;
+}
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(5.5rem, 20vw, 15rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  animation: slideUp 0.8s ease 0.1s both;
+  position: relative;
+  display: inline-block;
+}
+.hero-title::after {
+  content: '$LATE';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--purple-glow), var(--lilac));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: glitch 7s infinite 3s;
+}
+@keyframes glitch {
+  0%, 93%, 100% { opacity: 0; transform: none; }
+  94% { opacity: 1; transform: translateX(-3px); }
+  95% { opacity: 0; }
+  96% { opacity: 1; transform: translateX(3px) skewX(-5deg); }
+  97% { opacity: 0; }
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--muted);
+  margin-top: 1.5rem;
+  font-style: italic;
+  font-family: 'DM Serif Display', serif;
+  animation: slideUp 0.8s ease 0.2s both;
+}
+.hero-sub em { color: var(--lilac); font-style: normal; }
+
+.hero-hook {
+  font-size: clamp(0.75rem, 1.5vw, 0.88rem);
+  color: var(--muted);
+  max-width: 520px;
+  margin: 2rem auto;
+  line-height: 2;
+  animation: fadeIn 0.8s ease 0.4s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  animation: fadeIn 0.8s ease 0.55s both;
+}
+
+.hero-ticker {
+  margin-top: 5rem;
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  border: 1px solid rgba(124,58,237,0.15);
+  animation: fadeIn 0.8s ease 0.7s both;
+  flex-wrap: wrap;
+}
+.ticker-item {
+  padding: 1.2rem 2.5rem;
+  border-right: 1px solid rgba(124,58,237,0.15);
+  text-align: center;
+}
+.ticker-item:last-child { border-right: none; }
+.ticker-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.ticker-val   { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--white); margin-top: 0.25rem; }
+.ticker-val.green { color: var(--green); }
+.ticker-val.red   { color: var(--red); }
+
+.scroll-hint {
+  margin-top: 4rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation: fadeIn 1s ease 1.2s both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.scroll-hint:hover { color: var(--lilac); }
+.scroll-hint-arrow { animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<div id="cursor"></div>
+<nav>
+  <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="lore.html">Lore</a></li>
+    <li><a href="what.html">What is $LATE</a></li>
+    <li><a href="manifesto.html">Manifesto</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="roadmap.html">Roadmap</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="join.html" class="nav-cta">Join</a></li>
+  </ul>
+  <div class="nav-burger" id="burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="lore.html">Lore</a>
+  <a href="what.html">What is $LATE</a>
+  <a href="manifesto.html">Manifesto</a>
+  <a href="community.html">Community</a>
+  <a href="roadmap.html">Roadmap</a>
+  <a href="faq.html">FAQ</a>
+  <a href="join.html">Join →</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+
+    <!-- ============================================
+         👇 TON LOGO ICI
+         Remplace "YOUR-LOGO.png" par le nom de ton fichier
+         (ex: logo.png, late_logo.png, mascot.png...)
+         Place le fichier dans le même dossier que index.html
+         ============================================ -->
+    <div class="hero-logo-wrap">
+      <img src="latelogo.png" alt="$LATE logo">
+    </div>
+    <!-- ============================================ -->
+
+    <div class="hero-badge">Solana · Self-Aware · Chronically Late</div>
+
+    <h1 class="hero-title">$LATE</h1>
+
+    <p class="hero-sub">You watched it go 100x. <em>You're still watching.</em></p>
+
+    <p class="hero-hook">
+      Every cycle has the ones who got in early.<br>
+      Then there's us. The ones who were "about to."<br>
+      $LATE isn't a coin. It's a confession.
+    </p>
+
+    <div class="hero-actions">
+      <a href="join.html" class="btn-primary">Join the Late Club</a>
+      <a href="lore.html" class="btn-ghost">Read the Lore →</a>
+    </div>
+
+    <div class="hero-ticker">
+      <div class="ticker-item">
+        <div class="ticker-label">Chain</div>
+        <div class="ticker-val">Solana</div>
+      </div>
+      <div class="ticker-item">
+        <div class="ticker-label">Your entry</div>
+        <div class="ticker-val red">Missed</div>
+      </div>
+      <div class="ticker-item">
+        <div class="ticker-label">Still early?</div>
+        <div class="ticker-val green">Maybe</div>
+      </div>
+      <div class="ticker-item">
+        <div class="ticker-label">Regrets</div>
+        <div class="ticker-val">∞</div>
+      </div>
+    </div>
+
+    <a href="lore.html" class="scroll-hint">
+      <span>Continue</span>
+      <span class="scroll-hint-arrow">↓</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>◆</span> "I'll buy the dip" <span>◆</span> Too late, already pumped <span>◆</span> "Next one for sure" <span>◆</span> Watching from the sidelines <span>◆</span> "I was about to buy" <span>◆</span> Built on Solana <span>◆</span> Regret → Identity <span>◆</span> Late but aware <span>◆</span></div>
+    <div class="marquee-item"><span>◆</span> "I'll buy the dip" <span>◆</span> Too late, already pumped <span>◆</span> "Next one for sure" <span>◆</span> Watching from the sidelines <span>◆</span> "I was about to buy" <span>◆</span> Built on Solana <span>◆</span> Regret → Identity <span>◆</span> Late but aware <span>◆</span></div>
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <span class="footer-logo">$LATE</span>
+  <div>
+    <a href="https://t.me/alwayslateonsol" target="_blank" rel="noopener">Telegram</a> &nbsp;·&nbsp;
+    <a href="https://x.com/wearelateonsol" target="_blank" rel="noopener">X / Twitter</a> &nbsp;·&nbsp;
+    <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+    <a href="#">Raydium</a>
+  </div>
+  <div class="footer-disclaimer">
+    $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+    Not financial advice. Not investment advice. Just a very honest website.
+  </div>
+  <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+    © 2026 $LATE — Chronologically Cursed By Design
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

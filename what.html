@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — What Is It</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#what-page { padding-top: 5rem; min-height: 100vh; }
+
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin-top: 3.5rem;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.12);
+}
+.what-card {
+  background: var(--black);
+  padding: 2.5rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.what-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(124,58,237,0.07) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.what-card:hover::before { opacity: 1; }
+.what-card:hover { background: rgba(8,8,16,0.6); }
+
+.wc-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
+.wc-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.7rem;
+}
+.wc-body { font-size: 0.8rem; line-height: 1.85; color: var(--muted); }
+.wc-body em { color: var(--lilac); font-style: normal; }
+
+/* TOKEN INFO */
+.token-strip {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 1px solid rgba(124,58,237,0.15);
+}
+.ts-item {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-right: 1px solid rgba(124,58,237,0.15);
+}
+.ts-item:last-child { border-right: none; }
+.ts-label { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.ts-val { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--white); margin-top: 0.4rem; }
+.ts-val.ok { color: var(--green); }
+
+/* CA box */
+.ca-box {
+  margin-top: 2rem;
+  border: 1px solid rgba(124,58,237,0.2);
+  background: rgba(124,58,237,0.05);
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.ca-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.ca-addr { font-size: 0.78rem; color: var(--lilac); word-break: break-all; }
+.ca-copy {
+  background: transparent;
+  border: 1px solid rgba(124,58,237,0.3);
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.ca-copy:hover { border-color: var(--purple-glow); color: var(--white); }
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(124,58,237,0.1);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.page-nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.page-nav a:hover, .page-nav .next { color: var(--white); }
+
+@media (max-width: 768px) {
+  .what-grid { grid-template-columns: 1fr; }
+  .token-strip { grid-template-columns: repeat(3,1fr); }
+  .ts-item:nth-child(3) { border-right: none; }
+}
+</style>
+</head>
+<body>
+  <div id="cursor" style="width:6px;height:6px;background:var(--purple-glow);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s;mix-blend-mode:screen;"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lore.html">Lore</a></li>
+      <li><a href="what.html">What is $LATE</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="join.html" class="nav-cta">Join</a></li>
+    </ul>
+    <div class="nav-burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="lore.html">Lore</a>
+    <a href="what.html">What is $LATE</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="community.html">Community</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="faq.html">FAQ</a>
+    <a href="join.html">Join →</a>
+  </div>
+
+<div id="what-page">
+  <div class="section-inner">
+    <span class="section-tag reveal">Chapter 02</span>
+    <h1 class="section-title reveal">What is <em>$LATE</em>,<br>exactly?</h1>
+    <p class="reveal" style="color:var(--muted);font-size:0.85rem;max-width:540px;line-height:2;margin-top:-0.5rem;">
+      Depends who you ask. Here's our answer — and we're not going to dress it up.
+    </p>
+
+    <div class="what-grid" data-stagger>
+      <div class="what-card reveal">
+        <div class="wc-icon">🟣</div>
+        <div class="wc-title">A Solana Meme Coin</div>
+        <div class="wc-body">Yes, technically. Fast finality, low fees, the whole ecosystem. But calling $LATE "just a meme coin" is like calling a mirror "just glass." <em>Technically accurate. Spiritually insufficient.</em></div>
+      </div>
+      <div class="what-card reveal">
+        <div class="wc-icon">🧠</div>
+        <div class="wc-title">A Cultural Object</div>
+        <div class="wc-body">$LATE documents the crypto experience that nobody admits: the missed entries, the late buys, the retrace that never came. It takes the <em>most common emotion in crypto</em> — regret — and makes it the brand.</div>
+      </div>
+      <div class="what-card reveal">
+        <div class="wc-icon">🚫</div>
+        <div class="wc-title">Not a Promise</div>
+        <div class="wc-body">We will not promise a 100M MC. We will not create fake utilities. We will not hire KOLs to post "NGL this feels different 👀" while holding bags you paid for. <em>That ship sailed. And you missed it.</em></div>
+      </div>
+      <div class="what-card reveal">
+        <div class="wc-icon">🪞</div>
+        <div class="wc-title">A Self-Aware Paradox</div>
+        <div class="wc-body">The coin about being late <em>might be the one you're actually early to.</em> Or late to, again. The irony compounds. The bags don't always. That's the point. That's the joke. That's <em>also not entirely a joke.</em></div>
+      </div>
+    </div>
+
+    <div class="token-strip reveal">
+      <div class="ts-item">
+        <div class="ts-label">Network</div>
+        <div class="ts-val">Solana</div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-label">Ticker</div>
+        <div class="ts-val">$LATE</div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-label">Tax</div>
+        <div class="ts-val ok">0 / 0</div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-label">LP</div>
+        <div class="ts-val ok">Burned</div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-label">Mint</div>
+        <div class="ts-val ok">Revoked</div>
+      </div>
+      <div class="ts-item">
+        <div class="ts-label">Team alloc.</div>
+        <div class="ts-val ok">0%</div>
+      </div>
+    </div>
+
+    <div class="ca-box reveal">
+      <div>
+        <div class="ca-label">Contract Address</div>
+        <div class="ca-addr" id="caAddr">Coming Soon</div>
+      </div>
+      <button class="ca-copy" onclick="
+        navigator.clipboard.writeText(document.getElementById('caAddr').textContent);
+        this.textContent='Copied';
+        setTimeout(()=>this.textContent='Copy CA',1500);
+      ">Copy CA</button>
+    </div>
+
+    <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;" class="reveal">
+      <a href="manifesto.html" class="btn-primary">Read the Manifesto →</a>
+      <a href="#" class="btn-ghost">Buy on Raydium</a>
+    </div>
+
+    <div class="page-nav">
+      <a href="lore.html">← Lore</a>
+      <a href="manifesto.html" class="next">Manifesto →</a>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+  <footer>
+    <span class="footer-logo">$LATE</span>
+    <div>
+      <a href="#">Telegram</a> &nbsp;·&nbsp;
+      <a href="#">X / Twitter</a> &nbsp;·&nbsp;
+      <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+      <a href="#">Raydium</a>
+    </div>
+    <div class="footer-disclaimer">
+      $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+      This is not financial advice. This is not investment advice. This is a website about a coin
+      named after the feeling you have when you don't take financial advice. Please be careful with your money.
+    </div>
+    <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+      © 2026 $LATE — Chronologically Cursed By Design
+    </div>
+  </footer>
+</body>
+</html>

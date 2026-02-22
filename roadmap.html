@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — The Roadmap</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#roadmap-page {
+  padding-top: 5rem;
+  min-height: 100vh;
+  background: var(--black);
+}
+
+.disclaimer-box {
+  border: 1px solid rgba(124,58,237,0.2);
+  background: rgba(124,58,237,0.04);
+  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 4.5rem;
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 720px;
+}
+.disclaimer-box strong { color: var(--lilac); }
+
+.roadmap-track {
+  position: relative;
+  padding-left: 3.5rem;
+  max-width: 800px;
+}
+.roadmap-track::before {
+  content: '';
+  position: absolute;
+  left: 0.65rem;
+  top: 0.3rem;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--purple-glow), rgba(124,58,237,0.1));
+}
+
+.rp {
+  position: relative;
+  margin-bottom: 4.5rem;
+}
+.rp::before {
+  content: '';
+  position: absolute;
+  left: -2.95rem;
+  top: 0.5rem;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--black);
+  border: 2px solid var(--purple);
+  box-shadow: 0 0 14px rgba(124,58,237,0.5);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.rp:hover::before {
+  border-color: var(--purple-glow);
+  box-shadow: 0 0 20px rgba(168,85,247,0.7);
+}
+
+.rp.done::before { background: var(--purple); }
+.rp.active::before {
+  background: var(--purple-glow);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 14px rgba(168,85,247,0.5); }
+  50%        { box-shadow: 0 0 28px rgba(168,85,247,0.9); }
+}
+
+.rp-status {
+  display: inline-block;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  margin-bottom: 0.7rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+.rp-status.done    { background: rgba(34,197,94,0.1); color: var(--green); }
+.rp-status.active  { background: rgba(168,85,247,0.15); color: var(--purple-glow); }
+.rp-status.soon    { background: rgba(124,58,237,0.08); color: var(--muted); }
+.rp-status.unknown { background: rgba(107,107,138,0.08); color: var(--muted); }
+
+.rp-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--purple-glow);
+  margin-bottom: 0.4rem;
+  font-family: 'Syne', sans-serif;
+}
+
+.rp-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+.rp-title em { font-style: italic; color: var(--lilac); }
+
+.rp-body {
+  font-size: 0.8rem;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 560px;
+}
+.rp-body em { color: var(--white); font-style: normal; }
+
+.rp-items {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.rp-item {
+  font-size: 0.75rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.rp-item::before { content: '—'; color: rgba(124,58,237,0.4); }
+.rp-item.checked { color: rgba(240,238,255,0.5); }
+.rp-item.checked::before { content: '✓'; color: var(--green); }
+.rp-item.current::before { content: '▶'; color: var(--purple-glow); }
+
+/* Final honest box */
+.honest-box {
+  max-width: 700px;
+  border: 1px solid rgba(124,58,237,0.2);
+  padding: 3rem;
+  text-align: center;
+  margin-top: 5rem;
+}
+.honest-box-title {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--white);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+.honest-box-body { font-size: 0.78rem; color: var(--muted); line-height: 1.9; }
+.honest-box-body em { color: var(--lilac); font-style: normal; }
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(124,58,237,0.1);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.page-nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.page-nav a:hover, .page-nav .next { color: var(--white); }
+</style>
+</head>
+<body>
+  <div id="cursor" style="width:6px;height:6px;background:var(--purple-glow);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s;mix-blend-mode:screen;"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lore.html">Lore</a></li>
+      <li><a href="what.html">What is $LATE</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="join.html" class="nav-cta">Join</a></li>
+    </ul>
+    <div class="nav-burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="lore.html">Lore</a>
+    <a href="what.html">What is $LATE</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="community.html">Community</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="faq.html">FAQ</a>
+    <a href="join.html">Join →</a>
+  </div>
+
+<div id="roadmap-page">
+  <div class="section-inner">
+    <span class="section-tag reveal">Chapter 05</span>
+    <h1 class="section-title reveal">A roadmap.<br><em>Italicized<br>for irony.</em></h1>
+
+    <div class="disclaimer-box reveal">
+      <strong>Read this first.</strong> This is not a promise. This is not a legally binding document. This is a vibe document, written by people who are aware that crypto roadmaps are written by teams who have no idea what will happen next Tuesday — and presented as quarterly milestones. We refuse to lie to you in that particular way. What follows is what we actually intend to do, with the full caveat that intention and outcome are famously different things. If you're new here: welcome, we're glad you found us.
+    </div>
+
+    <div class="roadmap-track">
+
+      <div class="rp reveal">
+        <span class="rp-status done">Complete</span>
+        <div class="rp-label">Phase 0</div>
+        <h2 class="rp-title">The coin <em>exists.</em></h2>
+        <p class="rp-body">Fair launch. No VC. No pre-sale for "strategic partners" who are actually their friends with SAFT agreements. No team allocation disguised as "ecosystem fund." <em>The token launched.</em> That's Phase 0. Most projects don't survive it.</p>
+        <div class="rp-items">
+          <div class="rp-item checked">Fair launch on Raydium</div>
+          <div class="rp-item checked">LP burned</div>
+          <div class="rp-item checked">Mint revoked</div>
+          <div class="rp-item checked">Website launched (you are here)</div>
+        </div>
+      </div>
+
+      <div class="rp reveal">
+        <span class="rp-status active">In Progress</span>
+        <div class="rp-label">Phase 1</div>
+        <h2 class="rp-title">The meme<br><em>finds its people.</em></h2>
+        <p class="rp-body">Organic growth through content that's actually good. Community members who create because they want to — not because there's a meme contest with a $50 prize and twelve bots competing. <em>The $LATE identity spreads because it's embarrassingly recognizable.</em> That's the only growth strategy that works long-term.</p>
+        <div class="rp-items">
+          <div class="rp-item current">Telegram community building</div>
+          <div class="rp-item current">X presence, organic</div>
+          <div class="rp-item">Meme canon established</div>
+          <div class="rp-item">First 1,000 wallets who aren't bots</div>
+        </div>
+      </div>
+
+      <div class="rp reveal">
+        <span class="rp-status soon">Up Next</span>
+        <div class="rp-label">Phase 2</div>
+        <h2 class="rp-title">$LATE becomes<br>a <em>cultural fixture.</em></h2>
+        <p class="rp-body">Listings happen or they don't. We don't pay for them. Visibility expands through the quality of community and content. <em>The Late Collective becomes something people reference without needing context.</em> That's the goal. Not a price target. A cultural one. Those last longer.</p>
+        <div class="rp-items">
+          <div class="rp-item">Organic CEX interest (no payment)</div>
+          <div class="rp-item">Dexscreener trending (earned)</div>
+          <div class="rp-item">Collab with aligned projects</div>
+          <div class="rp-item">First real media mention</div>
+        </div>
+      </div>
+
+      <div class="rp reveal">
+        <span class="rp-status unknown">Unknown</span>
+        <div class="rp-label">Phase 3</div>
+        <h2 class="rp-title"><em>Honestly?</em><br>No idea. Neither do you.</h2>
+        <p class="rp-body">Any project claiming to know what Phase 3 looks like is either lying or hallucinating. We're choosing honesty over comfort. Phase 3 is whatever the community builds. We'll show up. <em>The question, as always, is whether you'll show up on time.</em></p>
+        <div class="rp-items">
+          <div class="rp-item">??? (community decides)</div>
+          <div class="rp-item">??? (market decides)</div>
+          <div class="rp-item">??? (we show up regardless)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="honest-box reveal">
+      <p class="honest-box-title">"We could have invented<br>a DeFi protocol nobody uses.<br>We chose honesty instead."</p>
+      <p class="honest-box-body">Most roadmaps are marketing documents. Ours is a statement of intent. <em>The intent is to build something real, stay honest about what we don't know, and not abandon the community when it's inconvenient.</em> That's the whole plan.</p>
+    </div>
+
+    <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;" class="reveal">
+      <a href="faq.html" class="btn-primary">Got Questions? →</a>
+      <a href="join.html" class="btn-ghost">Join Us</a>
+    </div>
+
+    <div class="page-nav">
+      <a href="community.html">← Community</a>
+      <a href="faq.html" class="next">FAQ →</a>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+  <footer>
+    <span class="footer-logo">$LATE</span>
+    <div>
+      <a href="#">Telegram</a> &nbsp;·&nbsp;
+      <a href="#">X / Twitter</a> &nbsp;·&nbsp;
+      <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+      <a href="#">Raydium</a>
+    </div>
+    <div class="footer-disclaimer">
+      $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+      This is not financial advice. This is not investment advice. This is a website about a coin
+      named after the feeling you have when you don't take financial advice. Please be careful with your money.
+    </div>
+    <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+      © 2026 $LATE — Chronologically Cursed By Design
+    </div>
+  </footer>
+</body>
+</html>

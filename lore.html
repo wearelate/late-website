@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — The Lore</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#lore-page {
+  padding-top: 5rem;
+  background: linear-gradient(to bottom, var(--black), var(--deep) 40%, var(--black));
+  min-height: 100vh;
+}
+
+.lore-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6rem 2.5rem 5rem;
+  text-align: center;
+}
+
+.lore-big-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 3.5rem;
+}
+.lore-big-title em { font-style: italic; color: var(--lilac); }
+
+.lore-body p {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  line-height: 1.85;
+  color: rgba(240,238,255,0.72);
+  margin-bottom: 1.8rem;
+  text-align: left;
+}
+.lore-body p em  { color: var(--lilac); font-style: normal; }
+.lore-body p strong { color: var(--white); }
+
+.lore-quote {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--white);
+  border-left: 2px solid var(--purple-glow);
+  padding: 1rem 0 1rem 2rem;
+  margin: 3rem 0;
+  text-align: left;
+  position: relative;
+}
+
+.lore-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--purple-glow), transparent);
+  margin: 3rem auto;
+}
+
+.lore-end {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 3rem 0 2rem;
+}
+.lore-end em { color: var(--purple-glow); font-style: italic; }
+
+/* BG ghost text */
+#lore-page::before {
+  content: 'LORE';
+  position: fixed;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(12rem, 28vw, 24rem);
+  color: rgba(124,58,237,0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(124,58,237,0.1);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.page-nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.page-nav a:hover { color: var(--lilac); }
+.page-nav .next { color: var(--white); }
+</style>
+</head>
+<body>
+  <div id="cursor" style="width:6px;height:6px;background:var(--purple-glow);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s;mix-blend-mode:screen;"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lore.html">Lore</a></li>
+      <li><a href="what.html">What is $LATE</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="join.html" class="nav-cta">Join</a></li>
+    </ul>
+    <div class="nav-burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="lore.html">Lore</a>
+    <a href="what.html">What is $LATE</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="community.html">Community</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="faq.html">FAQ</a>
+    <a href="join.html">Join →</a>
+  </div>
+
+<div id="lore-page">
+  <div class="lore-inner">
+    <span class="section-tag reveal">Chapter 01</span>
+
+    <h1 class="lore-big-title reveal">
+      It started with a<br>
+      green candle<br>
+      <em>you didn't buy.</em>
+    </h1>
+
+    <div class="lore-body">
+      <p class="reveal">
+        You saw it. <em>You definitely saw it.</em> The chart doing something suspicious at 2am. The thread with 400 replies. The Discord blowing up. You told yourself you'd check it in the morning.
+      </p>
+
+      <div class="lore-quote reveal">
+        "Morning came. It was already 40x. You refreshed the chart like it would go back."
+      </div>
+
+      <p class="reveal">
+        This happened with <em>the first one.</em> Then the second. Then the one your friend bought at the bottom and sold at 80x while you were "still researching." He showed you the portfolio. You said "nice." You meant it and didn't mean it simultaneously.
+      </p>
+
+      <p class="reveal">
+        There was also the one you found yourself. <em>Genuinely, before anyone.</em> You told two people. Neither bought. You didn't buy either, because you wanted to "wait for the tokenomics doc." The tokenomics doc came out after the 30x.
+      </p>
+
+      <div class="lore-divider"></div>
+
+      <p class="reveal">
+        At some point, being late stopped being a mistake and started being a <strong>personality.</strong> You're not unlucky. You're not stupid. You process information carefully, arrive at correct conclusions, and then watch those conclusions play out without you — at scale, repeatedly, across multiple market cycles.
+      </p>
+
+      <p class="reveal">
+        You are chronologically cursed by design. <em>And you're not alone.</em>
+      </p>
+
+      <div class="lore-quote reveal">
+        "We didn't build a utility. We didn't build a roadmap. We built a mirror — and pointed it at everyone who's ever said 'I knew about it before the pump' while holding nothing."
+      </div>
+
+      <p class="reveal">
+        $LATE is for the calculated spectator. The 3am researcher. The one who "waited for the dip" until the dip became the new floor. The one who calculated exactly how much they'd have made and then <em>told no one.</em>
+      </p>
+
+      <p class="reveal">
+        It's for everyone who stayed anyway. After the pump. After the sideways. After the three weeks of silence in the Telegram. <strong>You're still here. That matters more than you think.</strong>
+      </p>
+    </div>
+
+    <div class="lore-end reveal">
+      We didn't build a coin.<br>
+      <em>We built a confession booth.</em>
+    </div>
+
+    <div style="margin-top:2.5rem;" class="reveal">
+      <a href="what.html" class="btn-primary">What is $LATE, technically? →</a>
+    </div>
+
+    <div class="page-nav">
+      <a href="index.html">← Home</a>
+      <a href="what.html" class="next">What is $LATE →</a>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+  <footer>
+    <span class="footer-logo">$LATE</span>
+    <div>
+      <a href="#">Telegram</a> &nbsp;·&nbsp;
+      <a href="#">X / Twitter</a> &nbsp;·&nbsp;
+      <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+      <a href="#">Raydium</a>
+    </div>
+    <div class="footer-disclaimer">
+      $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+      This is not financial advice. This is not investment advice. This is a website about a coin
+      named after the feeling you have when you don't take financial advice. Please be careful with your money.
+    </div>
+    <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+      © 2025 $LATE — Chronologically Cursed By Design
+    </div>
+  </footer>
+</body>
+</html>

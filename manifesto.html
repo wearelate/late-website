@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — The Manifesto</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#manifesto-page {
+  padding-top: 5rem;
+  min-height: 100vh;
+  background: var(--deep);
+  position: relative;
+  overflow: hidden;
+}
+
+#manifesto-page::before {
+  content: 'LATE';
+  position: fixed;
+  right: -3%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(14rem, 32vw, 28rem);
+  color: rgba(124,58,237,0.035);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.manifesto-intro {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.9;
+  margin-top: 1rem;
+}
+.manifesto-intro em { color: var(--lilac); font-style: normal; }
+
+.manifesto-list { margin-top: 4rem; max-width: 800px; }
+
+.m-line {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  padding: 2.2rem 0;
+  border-bottom: 1px solid rgba(124,58,237,0.08);
+  position: relative;
+}
+.m-line:first-child { border-top: 1px solid rgba(124,58,237,0.08); }
+
+.m-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.62rem;
+  color: var(--purple-glow);
+  letter-spacing: 0.1em;
+  min-width: 2.5rem;
+  padding-top: 0.5rem;
+}
+
+.m-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+  line-height: 1.45;
+  color: rgba(240,238,255,0.82);
+  flex: 1;
+}
+.m-text em { font-style: italic; color: var(--lilac); }
+.m-text strong { color: var(--white); font-style: normal; }
+
+.m-line:hover .m-text { color: var(--white); }
+.m-line { transition: all 0.2s; }
+.m-line:hover { padding-left: 0.5rem; }
+
+/* Closing statement */
+.manifesto-close {
+  max-width: 700px;
+  margin-top: 5rem;
+  padding: 3rem;
+  border: 1px solid rgba(124,58,237,0.2);
+  background: rgba(124,58,237,0.04);
+  text-align: center;
+}
+.manifesto-close p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  line-height: 1.6;
+  color: var(--white);
+}
+.manifesto-close em { color: var(--purple-glow); font-style: normal; }
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(124,58,237,0.1);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.page-nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.page-nav a:hover, .page-nav .next { color: var(--white); }
+</style>
+</head>
+<body>
+  <div id="cursor" style="width:6px;height:6px;background:var(--purple-glow);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s;mix-blend-mode:screen;"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lore.html">Lore</a></li>
+      <li><a href="what.html">What is $LATE</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="join.html" class="nav-cta">Join</a></li>
+    </ul>
+    <div class="nav-burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="lore.html">Lore</a>
+    <a href="what.html">What is $LATE</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="community.html">Community</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="faq.html">FAQ</a>
+    <a href="join.html">Join →</a>
+  </div>
+
+<div id="manifesto-page">
+  <div class="section-inner">
+    <span class="section-tag reveal">Chapter 03</span>
+    <h1 class="section-title reveal">We believe in<br><em>uncomfortable</em><br>honesty.</h1>
+    <p class="manifesto-intro reveal">Seven things we actually believe. Not for the website. <em>Because we've been lied to enough.</em></p>
+
+    <div class="manifesto-list" data-stagger>
+      <div class="m-line reveal">
+        <span class="m-num">01</span>
+        <p class="m-text">Being late is not a bug. It's the <em>universal crypto condition</em>, and we're done pretending otherwise. The market is full of people who arrived on time. We are not them. We are more.</p>
+      </div>
+      <div class="m-line reveal">
+        <span class="m-num">02</span>
+        <p class="m-text">KOL culture is a <em>tax on the credulous.</em> We don't pay influencers to pretend they found us organically. If we grow, it's because you told someone who told someone. That's it. That's the only growth we want.</p>
+      </div>
+      <div class="m-line reveal">
+        <span class="m-num">03</span>
+        <p class="m-text">Roadmaps are <em>fiction presented as strategy.</em> Ours admits this. We plan to exist, to build culture, and to not abandon the community when it's inconvenient. Everything else is a surprise. Yours and ours.</p>
+      </div>
+      <div class="m-line reveal">
+        <span class="m-num">04</span>
+        <p class="m-text">Community is not a Discord with <em>12 bots and 3 mods</em> who post "gm" into the void. Community is people who get the joke — because they lived the joke, multiple times, across multiple cycles.</p>
+      </div>
+      <div class="m-line reveal">
+        <span class="m-num">05</span>
+        <p class="m-text">The worst thing in crypto isn't losing money. It's losing money to a coin with a <em>cartoon dog, a fake CEX listing, and a dev team that's three guys on Fiverr.</em> We are none of those things. Verify everything.</p>
+      </div>
+      <div class="m-line reveal">
+        <span class="m-num">06</span>
+        <p class="m-text">"Too late but still early" is <em>not cope.</em> It is a legitimate philosophical position about temporal uncertainty in asymmetric markets. The market is always somewhere between those two things. So are we.</p>
+      </div>
+      <div class="m-line reveal">
+        <span class="m-num">07</span>
+        <p class="m-text">We turn <em>regret into identity.</em> Late into narrative. Outsider into culture. If that's a 100x play, great. If it's a 1x with good memes and real community, <em>also fine — we're used to that outcome and we're making peace with it.</em></p>
+      </div>
+    </div>
+
+    <div class="manifesto-close reveal">
+      <p>
+        "Every project promises the future.<br>
+        $LATE acknowledges the past.<br>
+        <em>That's why it's different.</em><br>
+        That's why you're still reading."
+      </p>
+    </div>
+
+    <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;" class="reveal">
+      <a href="community.html" class="btn-primary">Meet the Community →</a>
+      <a href="join.html" class="btn-ghost">Join us</a>
+    </div>
+
+    <div class="page-nav">
+      <a href="what.html">← What is $LATE</a>
+      <a href="community.html" class="next">Community →</a>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+  <footer>
+    <span class="footer-logo">$LATE</span>
+    <div>
+      <a href="#">Telegram</a> &nbsp;·&nbsp;
+      <a href="#">X / Twitter</a> &nbsp;·&nbsp;
+      <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+      <a href="#">Raydium</a>
+    </div>
+    <div class="footer-disclaimer">
+      $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+      This is not financial advice. This is not investment advice. This is a website about a coin
+      named after the feeling you have when you don't take financial advice. Please be careful with your money.
+    </div>
+    <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+      © 2026 $LATE — Chronologically Cursed By Design
+    </div>
+  </footer>
+</body>
+</html>

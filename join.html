@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — Join</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#join-page {
+  padding-top: 5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.join-bg {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(124,58,237,0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 10% 90%, rgba(168,85,247,0.08) 0%, transparent 60%),
+    var(--black);
+  z-index: 0;
+}
+
+.join-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 7rem 2.5rem 5rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.join-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+}
+.join-title em { font-style: italic; color: var(--lilac); }
+
+.join-sub {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto 3.5rem;
+}
+.join-sub em { color: var(--white); font-style: normal; }
+
+/* LINKS */
+.join-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.join-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem 1.5rem;
+  text-decoration: none;
+  border: 1px solid rgba(124,58,237,0.2);
+  background: rgba(8,8,16,0.6);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.join-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 100%, rgba(124,58,237,0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.join-link:hover::before { opacity: 1; }
+.join-link:hover { border-color: var(--purple-glow); transform: translateY(-3px); }
+.join-link:hover .jl-label { color: var(--white); }
+
+.jl-icon { font-size: 1.8rem; }
+.jl-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.jl-label { font-size: 0.68rem; color: var(--muted); transition: color 0.2s; }
+
+/* BUY BUTTON — featured */
+.buy-btn {
+  display: block;
+  max-width: 560px;
+  margin: 1rem auto 0;
+  background: var(--purple);
+  color: var(--white);
+  padding: 1.2rem 2.5rem;
+  border: none;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.buy-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.buy-btn:hover::before { transform: translateX(100%); }
+.buy-btn:hover { background: var(--purple-glow); color: var(--black); }
+
+/* FINAL QUOTE */
+.final-quote {
+  margin-top: 5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fq-text {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  line-height: 1.6;
+  color: rgba(240,238,255,0.4);
+  margin-bottom: 0.8rem;
+}
+.fq-attr { font-size: 0.62rem; color: rgba(107,107,138,0.5); letter-spacing: 0.1em; }
+
+.join-note {
+  margin-top: 3rem;
+  font-size: 0.65rem;
+  color: rgba(107,107,138,0.5);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+
+/* Animated rings */
+.rings {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(124,58,237,0.08);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: expandRing 8s ease-in-out infinite;
+}
+.ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+.ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 1.5s; }
+.ring:nth-child(3) { width: 700px; height: 700px; animation-delay: 3s; }
+.ring:nth-child(4) { width: 900px; height: 900px; animation-delay: 4.5s; }
+@keyframes expandRing {
+  0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.8); }
+  30%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+}
+
+@media (max-width: 600px) {
+  .join-links { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+  <div id="cursor" style="width:6px;height:6px;background:var(--purple-glow);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s;mix-blend-mode:screen;"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lore.html">Lore</a></li>
+      <li><a href="what.html">What is $LATE</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="join.html" class="nav-cta">Join</a></li>
+    </ul>
+    <div class="nav-burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="lore.html">Lore</a>
+    <a href="what.html">What is $LATE</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="community.html">Community</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="faq.html">FAQ</a>
+    <a href="join.html">Join →</a>
+  </div>
+
+<div class="join-bg"></div>
+
+<div id="join-page">
+  <div class="rings">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+
+  <div class="join-inner">
+    <span class="section-tag reveal">Final Stop</span>
+
+    <h1 class="join-title reveal">
+      You're still<br>
+      reading.<br>
+      <em>That means<br>something.</em>
+    </h1>
+
+    <p class="join-sub reveal">
+      Everyone who was going to dismiss this already left.<br>
+      You stayed. <em>That's the first correct decision you've made in three pumps.</em>
+    </p>
+
+    <div class="join-links reveal">
+      <a href="https://t.me/alwayslateonsol" target="_blank" rel="noopener" class="join-link">
+        <span class="jl-icon">✈️</span>
+        <span class="jl-name">Telegram</span>
+        <span class="jl-label">Join the community</span>
+      </a>
+      <a href="https://x.com/wearelateonsol" target="_blank" rel="noopener" class="join-link">
+        <span class="jl-icon">𝕏</span>
+        <span class="jl-name">X / Twitter</span>
+        <span class="jl-label">Follow for updates</span>
+      </a>
+      <a href="#" class="join-link">
+        <span class="jl-icon">📊</span>
+        <span class="jl-name">Dexscreener</span>
+        <span class="jl-label">Watch the chart (or don't)</span>
+      </a>
+      <a href="#" class="join-link">
+        <span class="jl-icon">⚡</span>
+        <span class="jl-name">Raydium</span>
+        <span class="jl-label">Buy (or watch it go up)</span>
+      </a>
+    </div>
+
+    <a href="#" class="buy-btn reveal" style="opacity:0.4;cursor:not-allowed;">Buy $LATE on Raydium — Coming Soon</a>
+
+    <div class="final-quote reveal">
+      <p class="fq-text">
+        "We didn't promise you the moon.<br>
+        We promised to be honest.<br>
+        In this market, that's rarer."
+      </p>
+      <p class="fq-attr">— $LATE team, 2026</p>
+    </div>
+
+    <p class="join-note reveal">
+      CA: Coming Soon or Late · Built on Solana<br>
+      Not financial advice. Not therapy. Though admittedly closer to the second one.<br>
+      $LATE is a meme coin. Please only use money you're comfortable losing. We mean that.
+    </p>
+  </div>
+</div>
+
+<script src="main.js"></script>
+  <footer>
+    <span class="footer-logo">$LATE</span>
+    <div>
+      <a href="https://t.me/alwayslateonsol" target="_blank" rel="noopener">Telegram</a> &nbsp;·&nbsp;
+      <a href="https://x.com/wearelateonsol" target="_blank" rel="noopener">X / Twitter</a> &nbsp;·&nbsp;
+      <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+      <a href="#">Raydium</a>
+    </div>
+    <div class="footer-disclaimer">
+      $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+      This is not financial advice. This is not investment advice. This is a website about a coin
+      named after the feeling you have when you don't take financial advice. Please be careful with your money.
+    </div>
+    <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+      © 2026 $LATE — Chronologically Cursed By Design
+    </div>
+  </footer>
+</body>
+</html>

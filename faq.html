@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LATE — FAQ</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#faq-page { padding-top: 5rem; min-height: 100vh; background: var(--deep); }
+
+.faq-intro {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.9;
+  margin-top: 1rem;
+}
+
+.faq-list { margin-top: 4rem; max-width: 820px; }
+
+.faq-item { border-bottom: 1px solid rgba(124,58,237,0.1); }
+.faq-item:first-child { border-top: 1px solid rgba(124,58,237,0.1); }
+
+.faq-q {
+  padding: 1.6rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+  color: var(--white);
+  transition: color 0.2s;
+  user-select: none;
+  gap: 1rem;
+}
+.faq-q:hover { color: var(--lilac); }
+.faq-q-text { flex: 1; }
+.faq-q-icon { color: var(--purple-glow); font-size: 1.3rem; transition: transform 0.35s; flex-shrink: 0; line-height: 1; }
+.faq-item.open .faq-q { color: var(--lilac); }
+.faq-item.open .faq-q-icon { transform: rotate(45deg); }
+
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
+.faq-item.open .faq-a { max-height: 400px; }
+
+.faq-a-inner {
+  padding: 0 0 1.8rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 680px;
+}
+.faq-a-inner em { color: var(--lilac); font-style: normal; }
+.faq-a-inner strong { color: var(--white); }
+
+/* Final nudge */
+.faq-end {
+  max-width: 640px;
+  margin-top: 5rem;
+  padding: 2.5rem 3rem;
+  border: 1px solid rgba(124,58,237,0.2);
+  background: rgba(124,58,237,0.04);
+}
+.faq-end-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+.faq-end-title em { font-style: italic; color: var(--lilac); }
+.faq-end-body { font-size: 0.78rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(124,58,237,0.1);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.page-nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.page-nav a:hover, .page-nav .next { color: var(--white); }
+</style>
+</head>
+<body>
+  <div id="cursor" style="width:6px;height:6px;background:var(--purple-glow);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform 0.15s;mix-blend-mode:screen;"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">$<span>LATE</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lore.html">Lore</a></li>
+      <li><a href="what.html">What is $LATE</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="join.html" class="nav-cta">Join</a></li>
+    </ul>
+    <div class="nav-burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="lore.html">Lore</a>
+    <a href="what.html">What is $LATE</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="community.html">Community</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="faq.html">FAQ</a>
+    <a href="join.html">Join →</a>
+  </div>
+
+<div id="faq-page">
+  <div class="section-inner">
+    <span class="section-tag reveal">Chapter 06</span>
+    <h1 class="section-title reveal"><em>Frequently</em><br>Asked Things.</h1>
+    <p class="faq-intro reveal">Answered without a PR team reviewing them first. You'll notice the difference.</p>
+
+    <div class="faq-list reveal">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Is this a rug?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          LP is burned. Mint is revoked. We have no mechanism to rug you that differs from any other token. <em>Could the price go to zero?</em> Yes — that's different from a rug. A rug requires intent. We have the opposite intent, which is this website, this philosophy, and a genuine attempt at something real. <strong>DYOR. Always. This is not financial advice.</strong>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">When moon?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          We appreciate the classic. The answer: we don't know. Anyone who tells you otherwise with conviction is either wrong or selling something. <em>What we can say:</em> the community is real, the narrative is sticky, and good memes have always had market cap. Culture follows quality — eventually, sometimes, for the right ones. We think we're one. <strong>You decide if you agree.</strong>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Are you working with any KOLs or influencers?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          No. <em>Hard no.</em> KOL culture is how you get a 30-second pump followed by 300% bags and a Telegram full of people who were paid to be interested in you. If an influencer posts about $LATE, it's because they found it and thought it was good. We can't stop that — and honestly hope it happens organically. We just won't pay for performance.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">What's the utility?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          The utility is cultural. The utility is identity. The utility is that when you say "I hold $LATE" in crypto spaces, <em>people understand you immediately without further explanation.</em> We're not building a DEX. We're not creating a "LATE-fi" ecosystem or a staking mechanism nobody uses. We're creating something people actually want to be part of. <strong>That's harder to build and more durable than fake utility.</strong>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Isn't buying $LATE just proving you're late to buying $LATE?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Yes. <em>That's the bit.</em> You're always late to $LATE. The coin exists in a state of permanent temporal irony. You're either early and don't know it, or late and completely correct about yourself. <strong>Either way, you're exactly where you belong.</strong>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Do you have a team? Are they doxxed?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          There's a small team of people who believe in this. Pseudonymous, like most of crypto. <em>We'd argue the token structure — burned LP, revoked mint, zero team allocation — does more to protect you than a LinkedIn profile.</em> Actions over identity. That's the standard we hold ourselves to. Check the contract. That's the real doxx.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Why should I join the Telegram?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          Because it's the only crypto Telegram where people are actually funny, the conversation is real, and nobody will tell you to "buy the dip" while simultaneously dumping on you. <em>It's also where updates happen first.</em> Yes, this is a soft sell. We know. We're doing it anyway.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Is it too late to buy?</span>
+          <span class="faq-q-icon">+</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">
+          <em>That is literally the name of the coin.</em> We cannot answer this without being part of the answer. What we can say: it's not financial advice, it's always too late for something, and it might also be earlier than you think. The paradox is the point. <strong>You already know the answer. You just haven't decided yet.</strong>
+        </div></div>
+      </div>
+
+    </div>
+
+    <div class="faq-end reveal">
+      <h3 class="faq-end-title">Still have questions?<br><em>That's actually a good sign.</em></h3>
+      <p class="faq-end-body">The people who ask questions before buying are exactly who we want here. Come to Telegram. Ask them there. Someone will have a real answer, or a good enough joke that you'll forget you asked.</p>
+      <a href="join.html" class="btn-primary">Join the Conversation →</a>
+    </div>
+
+    <div class="page-nav">
+      <a href="roadmap.html">← Roadmap</a>
+      <a href="join.html" class="next">Join →</a>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+  <footer>
+    <span class="footer-logo">$LATE</span>
+    <div>
+      <a href="#">Telegram</a> &nbsp;·&nbsp;
+      <a href="#">X / Twitter</a> &nbsp;·&nbsp;
+      <a href="#">Dexscreener</a> &nbsp;·&nbsp;
+      <a href="#">Raydium</a>
+    </div>
+    <div class="footer-disclaimer">
+      $LATE is a meme coin on Solana with no intrinsic value or expectation of financial return.
+      This is not financial advice. This is not investment advice. This is a website about a coin
+      named after the feeling you have when you don't take financial advice. Please be careful with your money.
+    </div>
+    <div style="margin-top:1.5rem;opacity:0.25;font-size:0.6rem;">
+      © 2026 $LATE — Chronologically Cursed By Design
+    </div>
+  </footer>
+</body>
+</html>
